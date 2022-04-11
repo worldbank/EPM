@@ -57,13 +57,13 @@ To run the model, open _*main.gms_ file in GAMS IDE or GAMS Studio in the same d
 
 Documentation is available under the following links:
 
- - here the links to the documents in doc folder (Manual and Mathematical Formulations)
+ - here the links to the documents in doc folder (Manual and Mathematical Formulations): update the manual
 
 ## Citing EPM
 
 Please cite EPM as:
 
-Chattopadhyay, D., De Sisternes, F., Oguah, S. K. W., World Bank Electricity Planning Model (EPM) Mathematical Formulation, 2018, Energy Sector Management Assistance Program (ESMAP), International Bank for Reconstruction and Development, The World Bank, Washington DC
+To update with latest formulation document. Chattopadhyay, D., De Sisternes, F., Oguah, S. K. W., World Bank Electricity Planning Model (EPM) Mathematical Formulation, 2018, Energy Sector Management Assistance Program (ESMAP), International Bank for Reconstruction and Development, The World Bank, Washington DC
 
 ## License
 
