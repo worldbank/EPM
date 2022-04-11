@@ -1,7 +1,6 @@
 
 ---
-<img src="EPM_LOGO.png" alt="My cool logo"/>
-
+EPM
 ## Contents
 
 - [Contents](#contents)
