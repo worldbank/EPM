@@ -1,6 +1,6 @@
 $onText
 
-December 1, 2022
+December 1, 2018
 
 $offText
 $offEolCom
@@ -39,7 +39,7 @@ Sets
    ndc(g)      'candidate generators without capec trajectory'
    vre(g)      'variable renewable generators'
    re(g)       'renewable generators'
-   RampRate(g) 'ramp rate constrained generator blocks' // Ramprate takes out inflexible generators for a stronger formulation so that it runs faster
+   RampRate(g) 'ramp rate constrained generator blocks' // Ramprate takes out inflexible generators for a stronger formulation so that it runs faster  
 ************** H2 model specific sets ***************************
    eh(hh)           'existing hydrogen generation plants'
    nh(hh)           'new hydrogen generation plants'
@@ -76,7 +76,7 @@ Sets
    gsmap(g2,g)            'generator storage map'
    zcmap(z<,c<)           'map zones to countries'
    sTopology(z,z2)        'network topology - to be assigned through network data'
-   sMapNCZ(z,z2)          'set of connecting zones belong to different countries'
+   sMapNCZ(z,z2)          'set of connecting zones belong to different countries'   
 **************Hydrogen production model related sets*******************************
    h2zmap(hh,z)
    ft
@@ -116,9 +116,9 @@ $ifi not %mode%==MIRO   pHours(q<,d<,y ,t<) 'duration of each block'
    pTransferLimit(z,z2,q,y)         'Transfer limits by quarter (seasonal) and year between zones'
    pMaxPriceImportShare(y,c)        'Max share of imports by country'
    pAllowHighTransfer
-   pAllowExports                    'Allow price based exports'
+   pAllowExports                    'Allow price based exports'   
    pTradePrice(zext,q,d,y,t)        'trade price - export or import driven by prices [assuming each zone in a country can only trade with one external zone]'
-   pMaxImport                       'Maximum Hourly Imports, based on hourly country demand'
+   pMaxImport                       'Maximum Hourly Imports, based on hourly country demand'   
    pMaxExport                       'Maximum Hourly Exports, based on hourly country demand'
    pExtTransferLimit(z,zext,q,*,y)  'external transfer limit'
    pExtTransferLimitIn(z,zext,q,y)  'transfer limit with external zone for import towards internal zone'
@@ -179,7 +179,7 @@ $ifi not %mode%==MIRO   pHours(q<,d<,y ,t<) 'duration of each block'
    psys_reserve_margin
    pHeatrate(g,f)                   'Heatrate of fuel f in generator g'
    pIncludeDecomCom                 'Include simultaneous commissioning'
-
+     
 **************H2 model related parameters
    pH2Data(hh,hhdr)                 'hydrogen generating units'
    pIncludeH2                       'Flag to activate hydrogen related equations'
@@ -201,7 +201,7 @@ Positive Variables
    vUSE(z,q,d,t,y)           'unserved demand'
    vSurplus(z,q,d,t,y)       'surplus generation'
    vYearlySurplus(z,y)
-
+   
    vCap(g,y)                 'total capacity in place accounting for legacy, new and retired plants (MW)'
    vBuild(g,y)               'Build (MW)'
    vRetire(g,y)              'Retire (MW)'
@@ -256,7 +256,7 @@ Positive Variables
    vREPwr2Grid(g,f,q,d,t,y)    'Generation from VRE generators that goes to the grid'
    vFuelH2Quarter(z,q,y)        'H2 fuel saved for H2 electricity generationon a quarterly basis'
    vUnmetExternalH2(z,q,y)        'mmBTU of external H2 demand that cant be met'
-   vYearlyH2UnservedCost(z,y)   'Annual Cost of external H2 unserved in USD'
+   vYearlyH2UnservedCost(z,y)   'Annual Cost of external H2 unserved in USD'  
 
 
 
@@ -275,14 +275,14 @@ Free Variable
    vYearlyCarbonCost(z,y)       'country carbon cost'
    vYearlySysUSRCost(y)         'system unmet planing reserve'
    vYearlyCO2backCost(c,y)      'ccost of CO2 backstop'
-
+   
 ;
 
 Integer variable
    vBuildTransmission(z,z2,y)
    vBuiltCapVar(g,y)
    vRetireCapVar(g,y)
-
+   
 
 *******H2 production model integer variables******************
    vBuiltCapVarH2(hh,y)
@@ -361,8 +361,8 @@ Equations
    eTotalEmissions(y)              'total regional CO2eq emissions by year in tons'
    eEmissionsTotal(y)              'Total CO2eq emissions by year in tons'
    eYearlyCO2backstopCost(c,y)     'co2 backstop cost in USD'
-   eTotalEmissionsConstraint(y)         'constraint on total CO2eq emissions by year in tons'
-
+   eTotalEmissionsConstraint(y) 	'constraint on total CO2eq emissions by year in tons'
+  
 
    eRampDownInjLimit(g,q,d,t,y)
    eRampUpInjLimit(g,q,d,t,y)
@@ -401,7 +401,7 @@ Equations
    eCapThermBalance3(g,y)
    eBuildThermNew(g)
    eSimultComDecom(g,g1,y)          Simultaneous commissioning and decommissioning of pair of units
-
+   
 
 ***********************************Hydrogen production model**************************************
 eH2UnservedCost(z,y)
@@ -447,7 +447,7 @@ eNPVCost..
 * essentially the short run marginal cost for the generator
 
 eYearlyTotalCost(c,y)..
-   vYearlyTotalCost(c,y) =e= vYearlyUSRCost(c,y)+ vYearlyCO2backCost(c,y)
+   vYearlyTotalCost(c,y) =e= vYearlyUSRCost(c,y)+ vYearlyCO2backCost(c,y) 
                            + sum(zcmap(z,c), vYearlyFixedCost(z,y)
                                            + vYearlyVariableCost(z,y)
                                            + vYearlyReserveCost(z,y)
@@ -457,7 +457,7 @@ eYearlyTotalCost(c,y)..
                                            + vYearlyTransmissionAdditions(z,y)
                                            + vYearlyCurtailmentCost(z,y)
                                            + vYearlySurplus(z,y)
-*************************************H2 model*************************************************************
+*************************************H2 model*************************************************************                                           
                                            + vYearlyH2UnservedCost(z,y)$pIncludeH2);
 ***********************************************************************************************************
 eYearlyFixedCost(z,y)..
@@ -470,7 +470,7 @@ eYearlyFixedCost(z,y)..
                            + sum(gzmap(st,z),vCap(st,y)*pStorData(st,"FixedOM"))
                            + sum(gzmap(cs,z), vCapStor(cs,y)*pCSPData(cs,"Storage","FixedOM"))
                            + sum(gzmap(cs,z), vCapTherm(cs,y)*pCSPData(cs,"Thermal field","FixedOM"))
-
+                           
 ***********************************************Hydrogen model related costs******************************************
                           + sum(h2zmap(ndcH2,z), pCRFH2(ndcH2)*vCapH2(ndcH2,y)*pH2Data(ndcH2,"Capex")*1e6)$pIncludeH2
                           + sum(h2zmap(dcH2,z), vAnnCapexH2(dcH2,y))$pIncludeH2
@@ -483,7 +483,7 @@ eYearlyFixedCost(z,y)..
 eYearlyVariableCost(z,y)..
 
    vYearlyVariableCost(z,y) =e= sum((gzmap(g,z),f,q,d,t), pVarCost(g,f,y)*vPwrOut(g,f,q,d,t,y)*pHours(q,d,y,t))
-
+   
 *********************************************Hydrogen model related costs ************************************
 ***(Units for equation below)                              $/mmBTU_H2    x      mmBTU_H2/MWh_e  x      MW_e       x       Hrs
                               + sum((h2zmap(hh,z),q,d,t), pVarCostH2(hh,y)*pH2Data(hh,"Heatrate")*vH2PwrIn(hh,q,d,t,y)*pHours(q,d,y,t))$pIncludeH2;
@@ -508,7 +508,7 @@ eYearlyTradeCost(z,y)..
 eYearlyUSRCost(c,y)..
    vYearlyUSRCost(c,y) =e= vUnmetReserve(c,y)*pReserveVoLL
                          + sum((q,d,t), vUnmetSpinLoc(c,q,d,t,y)*pHours(q,d,y,t)*pSpinReserveVoLL);
-
+                         
 eYearlyCO2backstopCost(c,y)..
    vYearlyCO2backCost(c,y) =e= vYearlyCO2backstop(c,y)*pCostOfCO2backstop;
 
@@ -523,7 +523,7 @@ eYearlyCarbonCost(z,y)..
 *****************************************H2 model***********************************************************
 eH2UnservedCost(z,y)..
                 vYearlyH2UnservedCost(z,y)       =e= sum(q, vUnmetExternalH2(z,q,y) )*pH2UnservedCost$(pIncludeH2);
-***************************************************************************************************************
+***************************************************************************************************************                
 
 $macro symmax(s,i,j,h) max(s(i,j,h),s(j,i,h))
 
@@ -538,24 +538,24 @@ eDemSupply(z,q,d,t,y)..
 
 *
    pDemandData(z,q,d,y,t)*pEnergyEfficiencyFactor(z,y) =e=sum((gzmap(g,z),gfmap(g,f)),vPwrOut(g,f,q,d,t,y))$(pIncludeH2=0)
-*                                                            The row below is deactivated when H2 feature is on
-
+*                                                            The row below is deactivated when H2 feature is on   
+                                                        
 ***********************************************************H2 model equations below************************************************
                                                         +sum((gzmap(nRE,z),gfmap(nRE,f)),vPwrOut(nRE,f,q,d,t,y))$(pIncludeH2)
-                                                          +vPwrREGrid(z,q,d,t,y)$pIncludeH2
+                                                          +vPwrREGrid(z,q,d,t,y)$pIncludeH2                                                         
 *                                                         - SUM((h2zmap(hh,z)),vH2PwrIn(hh,q,d,t,y))$pIncludeH2
-
+                                                        
 *************************************************************************************************************************************
-
+                                                         
                                                          - sum(sTopology(z,z2), vFlow(z,z2,q,d,t,y))
                                                          + sum(sTopology(z,z2), vFlow(z2,z,q,d,t,y)*(1-pLossFactor(z,z2,y)))
 *                                                        + sum(gzmap(st,z), vStorOut(st,q,d,t,y))
                                                          - sum(gzmap(st,z), vStorInj(st,q,d,t,y))
-                                                         + sum(zext, vImportPrice(z,zext,q,d,t,y))
-                                                         - sum(zext, vExportPrice(z,zext,q,d,t,y))
+                                                         + sum(zext, vImportPrice(z,zext,q,d,t,y)) 
+                                                         - sum(zext, vExportPrice(z,zext,q,d,t,y)) 
                                                          + vUSE(z,q,d,t,y)
                                                          - vSurplus(z,q,d,t,y)
-
+                                                         
                                                          ;
 
 
@@ -603,7 +603,7 @@ eFuelLimit(c,f,y)$(pfuel_constraints and pMaxFuelLimit(c,f,y) > 0)..
    sum((zcmap(z,c),zfmap(z,f)), vFuel(z,f,y)) =l= pMaxFuelLimit(c,f,y)*1e6;
 
 eMinGen(g,q,d,t,y)$(Relevant(d) and pmingen_constraints and pGenData(g,"MinLimitShare") > 0)..
-    sum(gfmap(g,f), vPwrOut(g,f,q,d,t,y)) =g= vCap(g,y)*pGenData(g,"MinLimitShare") ;
+    sum(gfmap(g,f), vPwrOut(g,f,q,d,t,y)) =g= vCap(g,y)*pGenData(g,"MinLimitShare") ; 
 
 eRampDnLimit(g,q,d,t,y)$(Ramprate(g) and not sFirstHour(t) and pramp_constraints)..
    sum(gfmap(g,f), vPwrOut(g,f,q,d,t-1,y)) - sum(gfmap(g,f), vPwrOut(g,f,q,d,t,y)) =l= vCap(g,y)*pGenData(g,"RampDnRate");
@@ -655,7 +655,7 @@ eAdditionalTransfer(sTopology(z,z2),y)$pAllowHighTransfer..
 
 eAdditionalTransfer2(sTopology(z,z2),y)$pAllowHighTransfer..
    vBuildTransmission(z,z2,y)  =e=  vBuildTransmission(z2,z,y);
-
+   
 
 eMaxImportPrice(c,y)$(pallowExports)..
    sum((zcmap(z,c),zext,q,d,t), vImportPrice(z,zext,q,d,t,y)*pHours(q,d,y,t)) =l=
@@ -797,16 +797,16 @@ eCapitalConstraint$pcapital_constraints..
 eZonalEmissions(z,y)..
    vZonalEmissions(z,y) =e=
    sum((gzmap(g,z),gfmap(g,f),q,d,t), vPwrOut(g,f,q,d,t,y)*pHeatRate(g,f)*pFuelCarbonContent(f)*pHours(q,d,y,t));
-
+   
 eEmissionsCountry(c,y)$pzonal_co2_constraints..
    sum(zcmap(z,c), vZonalEmissions(z,y))-vYearlyCO2backstop(c,y)=l= pEmissionsCountry(c,y);
 
 eTotalEmissions(y)..
     sum(z, vZonalEmissions(z,y))=e= vTotalEmissions(y);
-
+    
 eTotalEmissionsConstraint(y)$pSystem_CO2_constraints..
     vTotalEmissions(y)-vYearlySysCO2backstop(y) =l= pEmissionsTotal(y);
-
+   
 eSimultComDecom(eg,ng,y)$( pIncludeDecomCom and mapGG(eg,ng))..          vBuild(ng,y) -  vRetire(eg,y) =l= 0;
 
 
@@ -855,7 +855,7 @@ eMaxCF_H2(hh,q,y)$(pIncludeH2)..
 
 *       mmBTU of H2 produced
 eFuel_H2(c,q,y)$(pIncludeH2)..
-*                   mmBTU            mmBTU                    mmBTU                                                                     -MWe-                Hr                mmBTU/MWhe
+*                   mmBTU            mmBTU                    mmBTU                                                                     -MWe-                Hr                mmBTU/MWhe 
     sum(zcmap(z,c), pExternalH2(z,q,y)-vUnmetExternalH2(z,q,y)$pExternalH2(z,q,y)+vFuelH2Quarter(z,q,y)) =e= sum( (zcmap(z,c),h2zmap(hh,z), d,t), vH2PwrIn(hh,q,d,t,y)*pHours(q,d,y,t)*pH2Data(hh,"HeatRate"));
 
 eFuel_H2_2(c,z,y)$(pIncludeH2)..
@@ -890,7 +890,7 @@ eAnnCapexH2(dcH2,sStartYear(y))$pIncludeH2..
 
 eRE2H2_4(z,q,d,t,y)$pIncludeH2..
   sum(h2zmap(hh,z),vH2PwrIn(hh,q,d,t,y))=e=vPwrREH2(z,q,d,t,y);
-
+ 
 
 eRE2H2_3(z,q,d,t,y)$pIncludeH2..
  vPwrREH2(z,q,d,t,y) =e= sum((gfmap(RE,f),gzmap(RE,z)),vREPwr2H2(RE,f,q,d,t,y));
@@ -926,7 +926,7 @@ Model PA /
    eMinGenRE
    eMaxCF
    eMinGen
-
+   
    eFuel
    eRampUpLimit
    eRampDnLimit
@@ -936,7 +936,7 @@ Model PA /
    eResReqLocal
    eResReqSystem
    eZonalMinCapReserve
-
+   
    eVREProfile
    eFuelLimit
    eCapitalConstraint
@@ -946,28 +946,28 @@ Model PA /
    eTotalEmissionsConstraint
    eYearlyCurtailmentCost
    eYearlyCO2backstopCost
-
+   
    eBuiltCap
    eRetireCap
-
+   
    eTransferLimit
    eYearlyTransmissionAdditions
    eAdditionalTransfer
    eAdditionalTransfer2
    eMaxImportPrice
-   eMaxExportPrice
+   eMaxExportPrice  
    eMaxhourlyImportsshare
    eMaxhourlyExportsshare
    eYearlyTradeCost
    eExtZoneLimitImport
-   eExtZoneLimitExport
+   eExtZoneLimitExport   
 
 
    eSystemMinCapReserve
    eYearlySysUSRCost
    eYearlySurplusCost
 
-
+   
    eStorageCap
    eStorageCap2
    eStorageInjection
@@ -977,9 +977,9 @@ Model PA /
    eStorageNet
    eStorBal
    eStorBal1
-
+  
    eStorageOutput
-
+   
    eStorageCSPCap
    eInjCSP
    eInjCSP1
@@ -988,22 +988,22 @@ Model PA /
    eStorageCSPBal2
    eStorageCSPBal
    eStorageCSPBal1
-
+   
    eCapacityStorLimit
    eCapStorBalance1
    eCapStorBalance2
    eCapStorBalance3
    eBuildStorNew
-
+   
    eCapacityThermLimit
    eCapThermBalance1
    eCapThermBalance2
    eCapThermBalance3
    eBuildThermNew
-
+   
    eAnnCapex1
    eAnnCapex
-
+   
 
    eSimultComDecom
 
@@ -1014,7 +1014,7 @@ Model PA /
    vAdditionalTransfer(sAdditionalTransfer)
    vFlow(sFlow)
    vReserve(sReserve)
-
+   
 
 ***************************Equations for H2 model*******************************
    vH2PwrIn(sH2PwrIn)
@@ -1045,5 +1045,5 @@ Model PA /
 
    eAnnCapexH2_1
    eAnnCapexH2
-
+  
 /;

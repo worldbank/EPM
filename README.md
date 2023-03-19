@@ -1,2 +1,0 @@
-# EPM
-Electricity Planning Model
