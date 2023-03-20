@@ -12,7 +12,7 @@ $ if not "x%gams.IDCGDXInput%"=="x" $set mode MIRO
 $endIf.mode
 
 
-*** 
+***  November 2022
 *** Declarations
 ***
 * Turn on/off additional information to the listing file
