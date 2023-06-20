@@ -51,9 +51,8 @@ To run the model, open _*main.gms_ file in GAMS IDE or GAMS Studio in the same d
 - World Bank Group. Poland Energy Transition: The Path to Sustainability in the Electricity and Heating Sector. World Bank, 2018.
 ## Documentation
 
-Documentation is available under the following links:
+Documentation is available here: https://github.com/worldbank/EPM/blob/main/WB_Electricity_Planning_Model_Documentation_2023.pdf
 
- - here the links to the documents in doc folder (Manual and Mathematical Formulations)
 
 ## Citing EPM
 
