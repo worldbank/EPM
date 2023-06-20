@@ -981,7 +981,7 @@ option savepoint=1;
 
 
 Solve PA using MIP minimizing vNPVcost;
-*$include WB_EPM_v8_5_Report.gms
+$include WB_EPM_v8_5_Report.gms
 
 
 $ifThen %gams.ProcTreeMemMonitor%==1
